@@ -15,6 +15,8 @@ void read_array_from_file(std::string &&file_path, std::vector<double> &array)
         } else if (errno == EACCES) {
             std::cerr << "Нет прав доступа" << std::endl;
         }
+
+        return;
     }
 
     double number;
@@ -25,6 +27,15 @@ void read_array_from_file(std::string &&file_path, std::vector<double> &array)
     }
 
     input_file.close();
+}
+
+void read_json(std::string &&file_path, nlohmann::json &json_data)
+{
+    std::ifstream json_file("./data/density.json");
+
+    json_data = nlohmann::json::parse(json_file);
+
+    json_file.close();
 }
 
 void map(std::function<double(double)> func, std::vector<double> &array, std::vector<double> &mapped_array)

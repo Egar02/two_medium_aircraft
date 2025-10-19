@@ -21,9 +21,9 @@ int main()
 
     map(geopotential_height, heights, geopotential_heights);
 
-    std::ifstream json_file("./data/density.json");
+    json data;
 
-    json data = json::parse(json_file);
+    read_json("./data/density.json", data);
 
     std::unordered_map<double, double> densities;
 
@@ -31,7 +31,6 @@ int main()
     {
         densities[item["height"]] = item["rho"];
     }
-
 
     return 0;
 }
