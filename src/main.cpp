@@ -27,10 +27,20 @@ int main()
 
     std::unordered_map<double, double> densities;
 
+    std::vector<double> plot_heights, plot_densities;
+
     for (const auto& item : data)
     {
         densities[item["height"]] = item["rho"];
+        plot_heights.push_back(item["height"]);
+        plot_densities.push_back(item["rho"]);
     }
+
+    Gnuplot plt{};
+
+    plt.redirect_to_png("../plots/h-rho.png", "800,600");
+    plt.plot(plot_heights, plot_densities, "h-rho");
+    plt.show();
 
     return 0;
 }
