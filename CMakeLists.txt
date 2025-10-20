@@ -52,35 +52,13 @@ target_include_directories(alglib-cpp PUBLIC
 #
 # #
 
-# # Либа matplotlib-cpp
-#
-# Поиск Python (обязательно)
-find_package(Python REQUIRED COMPONENTS Interpreter Development)
-# Настройка matplotlib-cpp
-FetchContent_Declare(
-    matplotlib-cpp
-    GIT_REPOSITORY https://github.com/lava/matplotlib-cpp.git
-    GIT_TAG master
-)
-FetchContent_MakeAvailable(matplotlib-cpp)
-#
-# #
-
 # Добавляем исполняемый файл
 add_executable(program ./src/main.cpp ./src/utils.cpp ./src/Atmosphere.cpp)
 
 # Связываем с библиотеками
 target_link_libraries(program PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(program PRIVATE alglib-cpp)
-target_link_libraries(program PRIVATE matplotlib_cpp Python::Python
-)
 
 set_target_properties(program PROPERTIES
         VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     )
-
-# Добавляем пути к заголовочным файлам Python
-target_include_directories(program 
-    PRIVATE 
-    ${Python_INCLUDE_DIRS}
-)

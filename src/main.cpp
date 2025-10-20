@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include "alglib-cpp/integration.h"
 #include "alglib-cpp/diffequations.h"
-#include "libs/matplotlib-cpp/matplotlibcpp.h"
+#include "libs/gplot++/gplot++.h"
 
 using json = nlohmann::json;
 

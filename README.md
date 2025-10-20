@@ -9,4 +9,4 @@
 
 - nlohmann::json
 - alglib
-- matplotlib-cpp
+- GNUplot
