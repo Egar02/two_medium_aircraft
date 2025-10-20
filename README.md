@@ -10,3 +10,4 @@
 - nlohmann::json
 - alglib
 - GNUplot
+- Catch2

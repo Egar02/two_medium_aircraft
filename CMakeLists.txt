@@ -52,6 +52,17 @@ target_include_directories(alglib-cpp PUBLIC
 #
 # #
 
+# # Либа Catch2
+# Настраиваем загрузку Catch2
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.11.0  # Укажите нужную версию
+)
+
+# Загружаем и делаем доступной Catch2
+FetchContent_MakeAvailable(Catch2)
+
 # Добавляем исполняемый файл
 add_executable(program ./src/main.cpp ./src/utils.cpp ./src/Atmosphere.cpp)
 
@@ -62,3 +73,5 @@ target_link_libraries(program PRIVATE alglib-cpp)
 set_target_properties(program PROPERTIES
         VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     )
+
+add_subdirectory(tests)
