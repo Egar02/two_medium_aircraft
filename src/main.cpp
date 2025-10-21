@@ -19,7 +19,7 @@ int main()
 
     std::vector<double> geopotential_heights;
 
-    map(geopotential_height, heights, geopotential_heights);
+    apply_func(geopotential_height, heights, geopotential_heights);
 
     json data;
 

@@ -41,7 +41,7 @@ void read_json(std::string &&file_path, nlohmann::json &json_data)
         std::cerr << "Файл не существует" << std::endl;
         std::cout << "Текущая директория: " << current_path << std::endl;
     }
-    
+
     std::ifstream json_file(file_path);
 
     json_data = nlohmann::json::parse(json_file);
@@ -49,7 +49,7 @@ void read_json(std::string &&file_path, nlohmann::json &json_data)
     json_file.close();
 }
 
-void map(std::function<double(double)> func, std::vector<double> &array, std::vector<double> &mapped_array)
+void apply_func(std::function<double(double)> func, std::vector<double> &array, std::vector<double> &mapped_array)
 {
     for (double element : array)
     {
