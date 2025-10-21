@@ -10,6 +10,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/src)
 
 include(FetchContent)
 
+enable_testing()
+
 # # Либа nlohmann::json
 #
 # Загружаем либу из репозитория
@@ -74,4 +76,5 @@ set_target_properties(program PROPERTIES
         VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     )
 
+add_subdirectory(src)
 add_subdirectory(tests)
