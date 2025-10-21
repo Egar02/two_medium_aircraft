@@ -10,8 +10,12 @@ void read_array_from_file(std::string &&file_path, std::vector<double> &array)
     {
         std::cerr << "Не удалось открыть файл!" << std::endl;
 
-        if (errno == ENOENT) {
+        if (errno == ENOENT) 
+        {
+            std::filesystem::path current_path = std::filesystem::current_path();
             std::cerr << "Файл не существует" << std::endl;
+            std::cout << "Текущая директория: " << current_path << std::endl;
+
         } else if (errno == EACCES) {
             std::cerr << "Нет прав доступа" << std::endl;
         }

@@ -4,6 +4,7 @@
 #include <functional>
 #include <vector>
 #include <nlohmann/json.hpp>
+#include <filesystem>
 
 void read_array_from_file(std::string&& file_path, std::vector<double>& array);
 

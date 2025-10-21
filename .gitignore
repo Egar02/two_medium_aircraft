@@ -2,4 +2,5 @@ build
 .vscode
 
 program
-tests
+test_utils
+test_atmosphere
