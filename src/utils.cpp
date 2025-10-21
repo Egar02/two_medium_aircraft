@@ -35,7 +35,14 @@ void read_array_from_file(std::string &&file_path, std::vector<double> &array)
 
 void read_json(std::string &&file_path, nlohmann::json &json_data)
 {
-    std::ifstream json_file("./data/density.json");
+    if (!std::filesystem::exists(file_path))
+    {
+        std::filesystem::path current_path = std::filesystem::current_path();
+        std::cerr << "Файл не существует" << std::endl;
+        std::cout << "Текущая директория: " << current_path << std::endl;
+    }
+    
+    std::ifstream json_file(file_path);
 
     json_data = nlohmann::json::parse(json_file);
 
