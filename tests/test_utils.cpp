@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <functional>
 
+
 double EPS = 1e-8;
 
 bool compare_doubles(double left, double right)
@@ -13,7 +14,7 @@ bool compare_doubles(double left, double right)
     return abs(left - right) < EPS;
 }
 
-bool compare_vectors(std::vector<double> &left, std::vector<double> &right)
+bool compare_vectors(std::vector<double>& left, std::vector<double>& right)
 {
     for (int i = 0; i < left.size(); ++i)
     {
@@ -54,7 +55,7 @@ TEST_CASE("Чтение с json-файла", "read_json")
 
     std::unordered_map<double, double> densities;
 
-    for (const auto &item : json_file)
+    for (const auto& item : json_file)
     {
         densities[item["height"]] = item["rho"];
     }
@@ -63,6 +64,7 @@ TEST_CASE("Чтение с json-файла", "read_json")
     REQUIRE(compare_doubles(densities[0.0], 1.478079263048531));
     REQUIRE(compare_doubles(densities[47.0], 1.427529564820696e-3));
     REQUIRE(compare_doubles(densities[120.0], 2.440384595331594e-8));
+
 }
 
 TEST_CASE("Тест функции apply_func, лямбда-функция", "[apply_func]")
