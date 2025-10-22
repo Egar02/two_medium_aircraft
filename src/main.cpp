@@ -29,7 +29,7 @@ int main()
 
     std::vector<double> plot_heights, plot_densities;
 
-    for (const auto &item : data)
+    for (const auto& item : data)
     {
         densities[item["height"]] = item["rho"];
         plot_heights.push_back(item["height"]);
