@@ -19,3 +19,5 @@ double non_isotermic_pressure(double height, std::map<double, std::map<std::stri
 double isotermic_pressure(double height, std::map<double, std::map<std::string, double>>::const_iterator &pressure_it);
 
 double density(double pressure, double T_M);
+
+double thermodynamic_temperature(double molar_mass, double T_M);

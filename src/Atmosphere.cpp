@@ -122,3 +122,8 @@ double density(double pressure, double T_M)
 {
     return pressure * M_0 / (R * T_M);
 }
+
+double thermodynamic_temperature(double molar_mass, double T_M)
+{
+    return molar_mass * T_M / M_0;
+}
