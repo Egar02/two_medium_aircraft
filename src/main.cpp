@@ -105,6 +105,20 @@ int main()
     plt_sound_speeds.set_xlabel("h, м");
     plt_sound_speeds.set_ylabel("a, м/с");
     plt_sound_speeds.show();
+    //________________________________________________________________
+    //
+    // Вычисление динамической вязкости
+    std::vector<double> dynamic_viscosities;
+
+    apply_func(dynamic_viscosity, thermodynamic_temperatures, dynamic_viscosities);
+
+    Gnuplot plt_dynamic_viscosities{};
+    plt_dynamic_viscosities.redirect_to_png("../plots/mu-h.png", "800,600");
+    plt_dynamic_viscosities.plot(geopotential_heights, dynamic_viscosities);
+    plt_dynamic_viscosities.set_title("График динамической вязкости от высоты");
+    plt_dynamic_viscosities.set_xlabel("h, м");
+    plt_dynamic_viscosities.set_ylabel("{/Symbol m}, Па*с");
+    plt_dynamic_viscosities.show();
 
     return 0;
 }
