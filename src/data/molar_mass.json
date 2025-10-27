@@ -1,10 +1,42 @@
 [
-    {"height": 0.0, "molar_mass": 28.96442, "gamma": 0.0},
-    {"height": 94.0, "molar_mass": 28.96442, "gamma": -0.84e-6},
-    {"height": 94.5, "molar_mass": 28.964, "gamma": -0.80e-5},
-    {"height": 95.0, "molar_mass": 28.96, "gamma": -0.15e-4},
-    {"height": 96.0, "molar_mass": 28.945, "gamma": -0.35e-4},
-    {"height": 97.0, "molar_mass": 28.91, "gamma": -0.12e-3},
-    {"height": 97.5, "molar_mass": 28.85, "gamma": -0.15111e-3},
-    {"height": 120.0, "molar_mass": 25.45, "gamma": null}
+    {
+        "height": 0.0,
+        "molar_mass": 28.96442,
+        "gamma": 0.0
+    },
+    {
+        "height": 94.0,
+        "molar_mass": 28.96442,
+        "gamma": -0.84e-6
+    },
+    {
+        "height": 94.5,
+        "molar_mass": 28.964,
+        "gamma": -0.80e-5
+    },
+    {
+        "height": 95.0,
+        "molar_mass": 28.96,
+        "gamma": -0.15e-4
+    },
+    {
+        "height": 96.0,
+        "molar_mass": 28.945,
+        "gamma": -0.35e-4
+    },
+    {
+        "height": 97.0,
+        "molar_mass": 28.91,
+        "gamma": -0.12e-3
+    },
+    {
+        "height": 97.5,
+        "molar_mass": 28.85,
+        "gamma": -0.15111e-3
+    },
+    {
+        "height": 120.0,
+        "molar_mass": 25.45,
+        "gamma": 0.0
+    }
 ]

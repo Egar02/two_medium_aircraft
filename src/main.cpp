@@ -42,5 +42,7 @@ int main()
     plt.plot(plot_heights, plot_densities, "h-rho");
     plt.show();
 
+    molar_mass(200.0);
+
     return 0;
 }
