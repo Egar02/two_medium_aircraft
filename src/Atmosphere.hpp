@@ -25,3 +25,5 @@ double thermodynamic_temperature(double molar_mass, double T_M);
 double sound_speed(double pressure, double density);
 
 double dynamic_viscosity(double temperature);
+
+double kinematic_viscosity(double dynamic_viscosity, double density);

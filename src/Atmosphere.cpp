@@ -137,3 +137,8 @@ double dynamic_viscosity(double temperature)
 {
     return BETA_S * std::pow(temperature, 1.5) / (temperature + S);
 }
+
+double kinematic_viscosity(double dynamic_viscosity, double density)
+{
+    return dynamic_viscosity / density;
+}
