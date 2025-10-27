@@ -21,3 +21,5 @@ double isotermic_pressure(double height, std::map<double, std::map<std::string, 
 double density(double pressure, double T_M);
 
 double thermodynamic_temperature(double molar_mass, double T_M);
+
+double sound_speed(double pressure, double density);
