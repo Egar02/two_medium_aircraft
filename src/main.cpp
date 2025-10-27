@@ -50,5 +50,12 @@ int main()
     molar_temperature(48.0);
     molar_temperature(400.0);
 
+    std::cout << pressure(0) << std::endl;
+    std::cout << pressure(15) << std::endl;
+    std::cout << pressure(48) << std::endl;
+    std::cout << pressure(90) << std::endl;
+    std::cout << pressure(30) << std::endl;
+    std::cout << pressure(400) << std::endl;
+
     return 0;
 }

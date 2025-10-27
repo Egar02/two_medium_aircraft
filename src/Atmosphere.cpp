@@ -8,6 +8,8 @@ double R_EARTH = 6356.767e+3; // Радиус Земли, м
 
 std::map<double, std::map<std::string, double>> MOLAR_MASS_DATA;
 std::map<double, std::map<std::string, double>> MOLAR_TEMPERATURE_DATA;
+std::map<double, std::map<std::string, double>> PRESSURE_DATA;
+std::array<bool, 12> IS_ISOTERMIC_LAYER{false};
 
 double molar_mass(double height)
 {
@@ -28,7 +30,7 @@ double molar_mass(double height)
     double molar_mass_ref = it->second.at("molar_mass");
     double gamma = it->second.at("gamma");
 
-    return molar_mass_ref + gamma * (height - height_ref);
+    return molar_mass_ref + gamma * (height - height_ref) * 1e-3;
 }
 
 double geopotential_height(double height)
@@ -56,4 +58,61 @@ double molar_temperature(double height)
     double alpha = it->second.at("alpha");
 
     return T_ref + alpha * (height - height_ref) * 1e+3;
+}
+
+double pressure(double height)
+{
+    if (PRESSURE_DATA.empty())
+    {
+        nlohmann::json json_file;
+        read_json("./data/pressure.json", json_file);
+
+        for (const auto &item : json_file)
+        {
+            PRESSURE_DATA[item["height"]] = {{"p", item["p"]}, {"beta", item["beta"]}};
+        }
+
+        IS_ISOTERMIC_LAYER[2] = true;
+        IS_ISOTERMIC_LAYER[5] = true;
+        IS_ISOTERMIC_LAYER[8] = true;
+    }
+
+    auto pressure_it = find_lower_bound(height, PRESSURE_DATA);
+    auto cur_it = PRESSURE_DATA.begin();
+    int pos = 0;
+
+    while (cur_it != pressure_it)
+    {
+        cur_it++;
+        pos++;
+    }
+
+    if (IS_ISOTERMIC_LAYER[pos])
+    {
+        return isotermic_pressure(height, pressure_it);
+    }
+
+    auto T_it = find_lower_bound(height, MOLAR_TEMPERATURE_DATA);
+
+    return non_isotermic_pressure(height, pressure_it, T_it);
+}
+
+double non_isotermic_pressure(double height, std::map<double, std::map<std::string, double>>::const_iterator &pressure_it, std::map<double, std::map<std::string, double>>::const_iterator &T_it)
+{
+    double p_ref = pressure_it->second.at("p");
+    double beta = pressure_it->second.at("beta");
+
+    double T_M_ref = T_it->second.at("T");
+    double T_M = molar_temperature(height);
+
+    return p_ref * std::pow(T_M_ref / T_M, beta);
+}
+
+double isotermic_pressure(double height, std::map<double, std::map<std::string, double>>::const_iterator &pressure_it)
+{
+    double height_ref = pressure_it->first;
+    double p_ref = pressure_it->second.at("p");
+    double beta = pressure_it->second.at("beta");
+
+    return p_ref * std::exp(-beta * (height - height_ref) * 1e+3);
 }

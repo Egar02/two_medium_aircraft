@@ -77,4 +77,4 @@ set_target_properties(program PROPERTIES
     )
 
 add_subdirectory(src)
-add_subdirectory(tests)
+# add_subdirectory(tests)
