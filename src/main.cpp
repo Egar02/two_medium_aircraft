@@ -25,7 +25,13 @@ int main()
 
     apply_func(molar_mass, heights, molar_masses);
 
-    Gnuplot plt{};
+    Gnuplot plt_molar_masses{};
+    plt_molar_masses.redirect_to_png("../plots/M-h.png", "800,600");
+    plt_molar_masses.plot(heights, molar_masses);
+    plt_molar_masses.set_title("График молярной массы от высоты");
+    plt_molar_masses.set_xlabel("h, м");
+    plt_molar_masses.set_ylabel("M, кг/моль");
+    plt_molar_masses.show();
 
     return 0;
 }
