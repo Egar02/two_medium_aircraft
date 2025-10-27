@@ -72,7 +72,7 @@ double pressure(double height)
 
         for (const auto &item : json_file)
         {
-            PRESSURE_DATA[item["height"]] = {{"p", item["p"]}, {"beta", item["beta"]}};
+            PRESSURE_DATA[double(item["height"]) * 1000] = {{"p", item["p"]}, {"beta", item["beta"]}};
         }
 
         IS_ISOTERMIC_LAYER[2] = true;
@@ -117,7 +117,7 @@ double isotermic_pressure(double height, std::map<double, std::map<std::string, 
     double p_ref = pressure_it->second.at("p");
     double beta = pressure_it->second.at("beta");
 
-    return p_ref * std::exp(-beta * (height - height_ref) * 1e+3);
+    return p_ref * std::exp(-beta * (height - height_ref));
 }
 
 double density(double pressure, double T_M)
