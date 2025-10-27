@@ -7,6 +7,7 @@ double beta_S = 1.458e-6;     // Первый коэффициент Сатер�
 double R_EARTH = 6356.767e+3; // Радиус Земли, м
 
 std::map<double, std::map<std::string, double>> MOLAR_MASS_DATA;
+std::map<double, std::map<std::string, double>> MOLAR_TEMPERATURE_DATA;
 
 double molar_mass(double height)
 {
@@ -33,4 +34,26 @@ double molar_mass(double height)
 double geopotential_height(double height)
 {
     return R_EARTH * height / (R_EARTH + height);
+}
+
+double molar_temperature(double height)
+{
+    if (MOLAR_TEMPERATURE_DATA.empty())
+    {
+        nlohmann::json json_file;
+        read_json("./data/molar_temperature.json", json_file);
+
+        for (const auto &item : json_file)
+        {
+            MOLAR_TEMPERATURE_DATA[item["height"]] = {{"T", item["T"]}, {"alpha", item["alpha"]}};
+        }
+    }
+
+    auto it = find_lower_bound(height, MOLAR_TEMPERATURE_DATA);
+
+    double height_ref = it->first;
+    double T_ref = it->second.at("T");
+    double alpha = it->second.at("alpha");
+
+    return T_ref + alpha * (height - height_ref) * 1e+3;
 }

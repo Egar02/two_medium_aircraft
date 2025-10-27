@@ -46,5 +46,9 @@ int main()
     molar_mass(100.0);
     molar_mass(400.0);
 
+    molar_temperature(47.0);
+    molar_temperature(48.0);
+    molar_temperature(400.0);
+
     return 0;
 }

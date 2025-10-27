@@ -7,3 +7,5 @@
 double molar_mass(double height);
 
 double geopotential_height(double height);
+
+double molar_temperature(double height);
