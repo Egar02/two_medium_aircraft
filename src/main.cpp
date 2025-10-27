@@ -119,6 +119,20 @@ int main()
     plt_dynamic_viscosities.set_xlabel("h, м");
     plt_dynamic_viscosities.set_ylabel("{/Symbol m}, Па*с");
     plt_dynamic_viscosities.show();
+    //________________________________________________________________
+    //
+    // Вычисление кинематической вязкости
+    std::vector<double> kinematic_viscosities;
+
+    apply_func_2_args(kinematic_viscosity, dynamic_viscosities, densities, kinematic_viscosities);
+
+    Gnuplot plt_kinematic_viscosities{};
+    plt_kinematic_viscosities.redirect_to_png("../plots/nu-h.png", "800,600");
+    plt_kinematic_viscosities.plot(geopotential_heights, kinematic_viscosities);
+    plt_kinematic_viscosities.set_title("График кинематической вязкости от высоты");
+    plt_kinematic_viscosities.set_xlabel("h, м");
+    plt_kinematic_viscosities.set_ylabel("{/Symbol n}, м^2/с");
+    plt_kinematic_viscosities.show();
 
     return 0;
 }
