@@ -5,7 +5,7 @@ double k = 1.4;               // Показатель адиабаты возд�
 double S = 110.4;             // Первый коэффициент Сатерленда, К
 double BETA_S = 1.458e-6;     // Первый коэффициент Сатерленда, кг / (с * м * К ^ 0.5)
 double R_EARTH = 6356.767e+3; // Радиус Земли, м
-double M_0 = 29e-3;           // Молярная масса воздуха на высоте 0 м, кг/моль
+double M_0 = 28.96442e-3;     // Молярная масса воздуха на высоте 0 м, кг/моль
 
 std::map<double, std::map<std::string, double>> MOLAR_MASS_DATA;
 std::map<double, std::map<std::string, double>> MOLAR_TEMPERATURE_DATA;
@@ -23,7 +23,7 @@ double molar_mass(double height)
         {
             double height = item["height"];
 
-            MOLAR_MASS_DATA[height * 1000] = {{"molar_mass", item["molar_mass"]}, {"gamma", item["gamma"]}};
+            MOLAR_MASS_DATA[height * 1000] = {{"molar_mass", double(item["molar_mass"]) / 1000}, {"gamma", item["gamma"]}};
         }
     }
 
