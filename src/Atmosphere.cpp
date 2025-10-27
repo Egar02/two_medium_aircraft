@@ -23,7 +23,7 @@ double molar_mass(double height)
         {
             double height = item["height"];
 
-            MOLAR_MASS_DATA[height * 1000] = {{"molar_mass", double(item["molar_mass"]) / 1000}, {"gamma", item["gamma"]}};
+            MOLAR_MASS_DATA[height * 1000] = {{"molar_mass", double(item["molar_mass"]) / 1000}, {"gamma", double(item["gamma"]) / 1000}};
         }
     }
 
