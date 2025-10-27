@@ -57,5 +57,10 @@ int main()
     std::cout << pressure(30) << std::endl;
     std::cout << pressure(400) << std::endl;
 
+    double p_0 = pressure(0);
+    double T_M = molar_temperature(0);
+
+    double rho_0 = density(p_0, T_M);
+
     return 0;
 }

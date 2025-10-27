@@ -17,3 +17,5 @@ double pressure(double height);
 double non_isotermic_pressure(double height, std::map<double, std::map<std::string, double>>::const_iterator &pressure_it, std::map<double, std::map<std::string, double>>::const_iterator &T_it);
 
 double isotermic_pressure(double height, std::map<double, std::map<std::string, double>>::const_iterator &pressure_it);
+
+double density(double pressure, double T_M);

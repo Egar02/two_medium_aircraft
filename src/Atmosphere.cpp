@@ -5,6 +5,7 @@ double k = 1.4;               // Показатель адиабаты возд�
 double S = 110.4;             // Первый коэффициент Сатерленда, К
 double beta_S = 1.458e-6;     // Первый коэффициент Сатерленда, кг / (с * м * К ^ 0.5)
 double R_EARTH = 6356.767e+3; // Радиус Земли, м
+double M_0 = 29e-3;           // Молярная масса воздуха на высоте 0 м, кг/моль
 
 std::map<double, std::map<std::string, double>> MOLAR_MASS_DATA;
 std::map<double, std::map<std::string, double>> MOLAR_TEMPERATURE_DATA;
@@ -115,4 +116,9 @@ double isotermic_pressure(double height, std::map<double, std::map<std::string, 
     double beta = pressure_it->second.at("beta");
 
     return p_ref * std::exp(-beta * (height - height_ref) * 1e+3);
+}
+
+double density(double pressure, double T_M)
+{
+    return pressure * M_0 / (R * T_M);
 }
