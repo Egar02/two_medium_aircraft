@@ -3,7 +3,7 @@
 double R = 8.31432;           // Универсальная газовая постоянная, Дж / (К * моль)
 double k = 1.4;               // Показатель адиабаты воздуха, б/р
 double S = 110.4;             // Первый коэффициент Сатерленда, К
-double beta_S = 1.458e-6;     // Первый коэффициент Сатерленда, кг / (с * м * К ^ 0.5)
+double BETA_S = 1.458e-6;     // Первый коэффициент Сатерленда, кг / (с * м * К ^ 0.5)
 double R_EARTH = 6356.767e+3; // Радиус Земли, м
 double M_0 = 29e-3;           // Молярная масса воздуха на высоте 0 м, кг/моль
 
@@ -131,4 +131,9 @@ double thermodynamic_temperature(double molar_mass, double T_M)
 double sound_speed(double pressure, double density)
 {
     return std::sqrt(k * pressure / density);
+}
+
+double dynamic_viscosity(double temperature)
+{
+    return BETA_S * std::pow(temperature, 1.5) / (temperature + S);
 }
