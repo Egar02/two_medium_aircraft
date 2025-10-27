@@ -1,5 +1,6 @@
 #include "Atmosphere.hpp"
 
+double EPS = 1e-8;
 double R = 8.31432;           // Универсальная газовая постоянная, Дж / (К * моль)
 double k = 1.4;               // Показатель адиабаты воздуха, б/р
 double S = 110.4;             // Первый коэффициент Сатерленда, К
@@ -21,7 +22,26 @@ double molar_mass(double height)
         }
     }
 
-    return 0.0;
+    for (auto it = MOLAR_MASS_DATA.begin(); it != MOLAR_MASS_DATA.end(); ++it)
+    {
+        if (height - it->first < EPS)
+        {
+            it--;
+
+            double height_ref = it->first;
+            double molar_mass_ref = it->second.at("molar_mass");
+            double gamma = it->second.at("gamma");
+
+            return molar_mass_ref + gamma * (height - height_ref);
+        }
+    }
+
+    auto it = MOLAR_MASS_DATA.rbegin();
+    double height_ref = it->first;
+    double molar_mass_ref = it->second.at("molar_mass");
+    double gamma = it->second.at("gamma");
+
+    return molar_mass_ref + gamma * (height - height_ref);
 }
 
 double geopotential_height(double height)
