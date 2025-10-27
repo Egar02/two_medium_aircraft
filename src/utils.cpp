@@ -1,22 +1,25 @@
 #include "utils.hpp"
 
+double EPS = 1e-8;
+
 void read_array_from_file(std::string &&file_path, std::vector<double> &array)
 {
     std::ifstream input_file;
 
     input_file.open(file_path);
 
-    if (!input_file.is_open()) 
+    if (!input_file.is_open())
     {
         std::cerr << "Не удалось открыть файл!" << std::endl;
 
-        if (errno == ENOENT) 
+        if (errno == ENOENT)
         {
             std::filesystem::path current_path = std::filesystem::current_path();
             std::cerr << "Файл не существует" << std::endl;
             std::cout << "Текущая директория: " << current_path << std::endl;
-
-        } else if (errno == EACCES) {
+        }
+        else if (errno == EACCES)
+        {
             std::cerr << "Нет прав доступа" << std::endl;
         }
 
@@ -55,4 +58,22 @@ void apply_func(std::function<double(double)> func, std::vector<double> &array, 
     {
         mapped_array.push_back(func(element));
     }
+}
+
+std::map<double, std::map<std::string, double>>::const_iterator find_lower_bound(double height, std::map<double, std::map<std::string, double>> &data_dict)
+{
+    for (auto it = data_dict.begin(); it != data_dict.end(); ++it)
+    {
+        if (height - it->first < EPS)
+        {
+            it--;
+
+            return it;
+        }
+    }
+
+    auto it = data_dict.end();
+    it--;
+
+    return it;
 }
