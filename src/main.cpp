@@ -51,6 +51,7 @@ int main()
     plt_molar_temperatures.show();
     //________________________________________________________________
     //
+    // Вычисление давления
     std::vector<double> pressures;
 
     apply_func(pressure, geopotential_heights, pressures);
@@ -62,5 +63,20 @@ int main()
     plt_pressures.set_xlabel("h, м");
     plt_pressures.set_ylabel("p, Па");
     plt_pressures.show();
+    //________________________________________________________________
+    //
+    // Вычисление плотности
+    std::vector<double> densities;
+
+    apply_func_2_args(density, pressures, molar_temperatures, densities);
+
+    Gnuplot plt_densities{};
+    plt_densities.redirect_to_png("../plots/rho-h.png", "800,600");
+    plt_densities.plot(geopotential_heights, densities);
+    plt_densities.set_title("График плотности от высоты");
+    plt_densities.set_xlabel("h, м");
+    plt_densities.set_ylabel("{/Symbol r}, кг/м^3");
+    plt_densities.show();
+
     return 0;
 }
