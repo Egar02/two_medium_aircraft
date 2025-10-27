@@ -77,6 +77,20 @@ int main()
     plt_densities.set_xlabel("h, м");
     plt_densities.set_ylabel("{/Symbol r}, кг/м^3");
     plt_densities.show();
+    //________________________________________________________________
+    //
+    // Вычисление термодинамической температуры
+    std::vector<double> thermodynamic_temperatures;
+
+    apply_func_2_args(thermodynamic_temperature, molar_masses, molar_temperatures, thermodynamic_temperatures);
+
+    Gnuplot plt_thermodynamic_temperatures{};
+    plt_thermodynamic_temperatures.redirect_to_png("../plots/T-h.png", "800,600");
+    plt_thermodynamic_temperatures.plot(geopotential_heights, thermodynamic_temperatures);
+    plt_thermodynamic_temperatures.set_title("График термодинамической температуры от высоты");
+    plt_thermodynamic_temperatures.set_xlabel("h, м");
+    plt_thermodynamic_temperatures.set_ylabel("T, К");
+    plt_thermodynamic_temperatures.show();
 
     return 0;
 }
