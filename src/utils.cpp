@@ -60,6 +60,14 @@ void apply_func(std::function<double(double)> func, std::vector<double> &array, 
     }
 }
 
+void apply_func_2_args(std::function<double(double, double)> func, std::vector<double> &array_1, std::vector<double> &array_2, std::vector<double> &mapped_array)
+{
+    for (int i = 0; i < array_1.size(); ++i)
+    {
+        mapped_array.push_back(func(array_1[i], array_2[i]));
+    }
+}
+
 char double_less_equal(double left, double right)
 {
     if (fabs(left - right) < EPS)

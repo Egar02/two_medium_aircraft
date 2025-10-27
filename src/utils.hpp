@@ -13,6 +13,8 @@ void read_json(std::string &&file_path, nlohmann::json &json_data);
 
 void apply_func(std::function<double(double)> func, std::vector<double> &array, std::vector<double> &mapped_array);
 
+void apply_func_2_args(std::function<double(double, double)> func, std::vector<double> &array_1, std::vector<double> &array_2, std::vector<double> &mapped_array);
+
 char double_less_equal(double left, double right);
 
 std::map<double, std::map<std::string, double>>::const_iterator find_lower_bound(double height, std::map<double, std::map<std::string, double>> &data_dict);
