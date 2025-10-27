@@ -50,7 +50,7 @@ double molar_temperature(double height)
 
         for (const auto &item : json_file)
         {
-            MOLAR_TEMPERATURE_DATA[item["height"]] = {{"T", item["T"]}, {"alpha", item["alpha"]}};
+            MOLAR_TEMPERATURE_DATA[double(item["height"]) * 1000] = {{"T", item["T"]}, {"alpha", item["alpha"]}};
         }
     }
 
@@ -60,7 +60,7 @@ double molar_temperature(double height)
     double T_ref = it->second.at("T");
     double alpha = it->second.at("alpha");
 
-    return T_ref + alpha * (height - height_ref) * 1e+3;
+    return T_ref + alpha * (height - height_ref);
 }
 
 double pressure(double height)
