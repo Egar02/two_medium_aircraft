@@ -17,10 +17,7 @@ int main()
 
     read_array_from_file("input.txt", heights);
 
-    std::vector<double> geopotential_heights;
-
-    apply_func(geopotential_height, heights, geopotential_heights);
-
+    // Вычисление молярных масс
     std::vector<double> molar_masses;
 
     apply_func(molar_mass, heights, molar_masses);
@@ -32,6 +29,27 @@ int main()
     plt_molar_masses.set_xlabel("h, м");
     plt_molar_masses.set_ylabel("M, кг/моль");
     plt_molar_masses.show();
+    //________________________________________________________________
+    //
+    // Вычисление геопотенциальной высоты
+    std::vector<double> geopotential_heights;
 
+    apply_func(geopotential_height, heights, geopotential_heights);
+    //________________________________________________________________
+    //
+    // Вычисление молярной температуры
+    std::vector<double> molar_temperatures;
+
+    apply_func(molar_temperature, geopotential_heights, molar_temperatures);
+
+    Gnuplot plt_molar_temperatures{};
+    plt_molar_temperatures.redirect_to_png("../plots/T_M-h.png", "800,600");
+    plt_molar_temperatures.plot(geopotential_heights, molar_temperatures);
+    plt_molar_temperatures.set_title("График молярной температуры от высоты");
+    plt_molar_temperatures.set_xlabel("h, м");
+    plt_molar_temperatures.set_ylabel("T_M, К");
+    plt_molar_temperatures.show();
+    //________________________________________________________________
+    //
     return 0;
 }
