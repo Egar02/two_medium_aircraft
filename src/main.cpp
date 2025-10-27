@@ -51,5 +51,16 @@ int main()
     plt_molar_temperatures.show();
     //________________________________________________________________
     //
+    std::vector<double> pressures;
+
+    apply_func(pressure, geopotential_heights, pressures);
+
+    Gnuplot plt_pressures{};
+    plt_pressures.redirect_to_png("../plots/p-h.png", "800,600");
+    plt_pressures.plot(geopotential_heights, pressures);
+    plt_pressures.set_title("График давления от высоты");
+    plt_pressures.set_xlabel("h, м");
+    plt_pressures.set_ylabel("p, Па");
+    plt_pressures.show();
     return 0;
 }
