@@ -21,7 +21,9 @@ double molar_mass(double height)
 
         for (const auto &item : json_file)
         {
-            MOLAR_MASS_DATA[item["height"]] = {{"molar_mass", item["molar_mass"]}, {"gamma", item["gamma"]}};
+            double height = item["height"];
+
+            MOLAR_MASS_DATA[height * 1000] = {{"molar_mass", item["molar_mass"]}, {"gamma", item["gamma"]}};
         }
     }
 
@@ -31,7 +33,7 @@ double molar_mass(double height)
     double molar_mass_ref = it->second.at("molar_mass");
     double gamma = it->second.at("gamma");
 
-    return molar_mass_ref + gamma * (height - height_ref) * 1e-3;
+    return molar_mass_ref + gamma * (height - height_ref);
 }
 
 double geopotential_height(double height)
