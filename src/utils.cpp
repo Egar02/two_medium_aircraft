@@ -60,14 +60,33 @@ void apply_func(std::function<double(double)> func, std::vector<double> &array, 
     }
 }
 
+char double_less_equal(double left, double right)
+{
+    if (fabs(left - right) < EPS)
+    {
+        return 2;
+    }
+
+    if (left - right < EPS)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
 std::map<double, std::map<std::string, double>>::const_iterator find_lower_bound(double height, std::map<double, std::map<std::string, double>> &data_dict)
 {
     for (auto it = data_dict.begin(); it != data_dict.end(); ++it)
     {
-        if (height - it->first < EPS)
+        if (double_less_equal(height, it->first) == 1)
         {
             it--;
 
+            return it;
+        }
+        if (double_less_equal(height, it->first) == 2)
+        {
             return it;
         }
     }
