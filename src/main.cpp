@@ -91,6 +91,20 @@ int main()
     plt_thermodynamic_temperatures.set_xlabel("h, м");
     plt_thermodynamic_temperatures.set_ylabel("T, К");
     plt_thermodynamic_temperatures.show();
+    //________________________________________________________________
+    //
+    // Вычисление скростей звука
+    std::vector<double> sound_speeds;
+
+    apply_func_2_args(sound_speed, pressures, densities, sound_speeds);
+
+    Gnuplot plt_sound_speeds{};
+    plt_sound_speeds.redirect_to_png("../plots/a-h.png", "800,600");
+    plt_sound_speeds.plot(geopotential_heights, sound_speeds);
+    plt_sound_speeds.set_title("График скорости звука от высоты");
+    plt_sound_speeds.set_xlabel("h, м");
+    plt_sound_speeds.set_ylabel("a, м/с");
+    plt_sound_speeds.show();
 
     return 0;
 }
