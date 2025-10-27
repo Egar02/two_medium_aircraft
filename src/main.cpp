@@ -5,6 +5,7 @@
 #include "utils.hpp"
 #include <nlohmann/json.hpp>
 #include <unordered_map>
+#include <format>
 #include "alglib-cpp/integration.h"
 #include "alglib-cpp/diffequations.h"
 #include "libs/gplot++/gplot++.h"
@@ -133,6 +134,27 @@ int main()
     plt_kinematic_viscosities.set_xlabel("h, м");
     plt_kinematic_viscosities.set_ylabel("{/Symbol n}, м^2/с");
     plt_kinematic_viscosities.show();
+    //________________________________________________________________
+    //
+    // Вывод результатов в файл
+    std::ofstream output_file("../results/atmosphere.txt");
+
+    output_file << "h, км\t\th_Г, км\t\tT_M, К\t\tp, Па\t\trho, кг/м^3\t\tT, К\t\ta, м/с\t\tmu, Па*с\t\tnu, м^2/c" << std::endl;
+
+    for (int i = 0; i < heights.size(); ++i)
+    {
+        output_file << std::format("{:.3f}", heights[i] / 1000) << "\t\t"
+                    << std::format("{:.3f}", geopotential_heights[i] / 1000) << "\t\t"
+                    << std::format("{:.3f}", molar_temperatures[i]) << "\t\t"
+                    << std::format("{:.3f}", pressures[i]) << "\t\t"
+                    << std::format("{:.3f}", densities[i]) << "\t\t"
+                    << std::format("{:.3f}", thermodynamic_temperatures[i]) << "\t\t"
+                    << std::format("{:.3f}", sound_speeds[i]) << "\t\t"
+                    << std::format("{:.3e}", dynamic_viscosities[i]) << "\t\t"
+                    << std::format("{:.3e}", kinematic_viscosities[i]) << "\n";
+    }
+
+    output_file.close();
 
     return 0;
 }
